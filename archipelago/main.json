@@ -1,0 +1,22 @@
+[
+    {
+        "name": "main_hook.s",
+        "link_address": "0x020966F8",
+        "rom_address": "0x9A6F8"
+    },
+    {
+        "name": "main_load.s",
+        "link_address": "",
+        "rom_address": "0x0542ab40"
+    },
+    {
+        "name": "bazaar_hook.s",
+        "link_address": "",
+        "rom_address": "0x15DB8C"
+    },
+    {
+        "name": "bazaar_code.s",
+        "link_address": "",
+        "rom_address": "0x542AC48"
+    }
+]

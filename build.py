@@ -3,6 +3,7 @@ import pathlib
 import json
 import shutil
 from intro_skip import patch_intro
+from bsdiff4 import file_diff
 
 
 def run_print(args, file):
@@ -51,6 +52,7 @@ for e in event:
     injection_list.append((new_path, e["rom_address"]))
 
 # Copy rom
+original_rom = pathlib.Path("rom/Final Fantasy Tactics A2 - Grimoire of the Rift.nds")
 rom = pathlib.Path("rom/FFTA2 resized.nds")
 patched_rom = build_path / rom.with_stem("FFTA2 patched").name
 shutil.copy(rom, patched_rom)
@@ -65,3 +67,4 @@ with open(patched_rom, "r+b") as rom_file:
 
 # Intro skip
 patch_intro(patched_rom)
+file_diff(original_rom, patched_rom, build_path / "base_patch.bsdiff4")

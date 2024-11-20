@@ -18,5 +18,10 @@
         "name": "bazaar_code.s",
         "link_address": "",
         "rom_address": "0x542AC48"
+    },
+    {
+        "name": "four_rewards.s",
+        "link_address": "0x020f27b8",
+        "rom_address": "0xF67B8"
     }
 ]

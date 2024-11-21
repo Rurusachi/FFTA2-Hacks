@@ -22,6 +22,7 @@ devkit_path = pathlib.Path("H:/Diverse/DevkitPro/DevkitPro/devkitARM/bin")
 # Project folder and main event file. TODO: Pass as arguments
 source_path = pathlib.Path("archipelago")
 main_file = source_path / "main.json"
+definitions_file = source_path / "definitions.s"
 build_path = source_path / "build"
 
 with open(main_file, "r") as f:
@@ -35,7 +36,7 @@ injection_list = []
 for e in event:
     file = source_path / e["name"]
     new_path = build_path / file.with_suffix(".elf").name
-    args = [devkit_path / "arm-none-eabi-as", "-g", "-mcpu=arm7tdmi", "-mthumb-interwork", file, "-o", new_path]
+    args = [devkit_path / "arm-none-eabi-as", "-g", "-mcpu=arm7tdmi", "-mthumb-interwork", definitions_file, file, "-o", new_path]
     run_print(args, file)
 
     if e["link_address"] != "":

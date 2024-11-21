@@ -1,4 +1,3 @@
-
 .arm
 @ 0x020f27b8
 four_rewards:

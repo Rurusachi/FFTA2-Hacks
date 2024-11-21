@@ -6,22 +6,42 @@
     },
     {
         "name": "main_load.s",
-        "link_address": "",
+        "link_address": "0x02163EF8",
         "rom_address": "0x0542ab40"
     },
     {
         "name": "bazaar_hook.s",
-        "link_address": "",
+        "link_address": "0x0213594c",
         "rom_address": "0x15DB8C"
     },
     {
         "name": "bazaar_code.s",
-        "link_address": "",
+        "link_address": "0x02164000",
         "rom_address": "0x542AC48"
     },
     {
         "name": "four_rewards.s",
         "link_address": "0x020f27b8",
         "rom_address": "0xF67B8"
+    },
+    {
+        "name": "quest_reward_hook.s",
+        "link_address": "0x020ff58c",
+        "rom_address": "0x10358C"
+    },
+    {
+        "name": "quest_reward_code.s",
+        "link_address": "0x02164400",
+        "rom_address": "0x542B048"
+    },
+    {
+        "name": "pub_quest_reward_hook.s",
+        "link_address": "0x0213a6b4",
+        "rom_address": "0x152EF4"
+    },
+    {
+        "name": "pub_quest_reward_code.s",
+        "link_address": "0x02164480",
+        "rom_address": "0x542B0c8"
     }
 ]

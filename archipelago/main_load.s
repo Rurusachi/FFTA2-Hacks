@@ -1,24 +1,9 @@
-.macro SET_FUNC name, value
-	.global \name
-	.type   \name, %function
-	.set    \name, \value
-.endm
-
-SET_FUNC FUN_020cbab8, (0x020cbab8)
-SET_FUNC FUN_020cbac8, (0x020cbac8)
-SET_FUNC FUN_02096a58, (0x02096a58)
-SET_FUNC FUN_Add_unit_to_clan, (0x0209648c)
-SET_FUNC FUN_02095be4, (0x02095be4)
-@SET_FUNC FUN_continue, (0x02096734)
-
 .arm
-
+@ 02163EF8
 mov r0, r10
-mov lr, pc
-ldr pc, =FUN_020cbab8
+bl FUN_020cbab8
 mov r11, r0
-mov lr, pc
-ldr pc, =FUN_020cbac8
+bl FUN_020cbac8
 mov r6, r0
 cmp r11, #0x0
 cmpne r6, #0x0
@@ -26,8 +11,7 @@ mov r9, #0x0
 moveq r0, #0x0
 popeq {r3-r11,pc}
 mov r0, #0x2
-mov lr, pc
-ldr pc, =FUN_02096a58
+bl FUN_02096a58
 mov r8, r0
 mov r7, r9
 and r5, r10, #0x3f
@@ -53,8 +37,7 @@ LAB_02096760:
 	str r2,[sp,#0x0]
 	ldrb r2,[r6,#0xa]
 	ldrb r3,[r6,#0xb]
-	mov lr, pc
-	ldr pc, =FUN_Add_unit_to_clan
+	bl FUN_Add_unit_to_clan
 	mov r9,r4
 LAB_02096780:
 	add r7, r7, #0x1
@@ -67,8 +50,7 @@ LAB_02096788:
 	tst r10, #0x3f
 	bne LAB_020967a8
 	mov r0, r11
-	mov lr, pc
-	ldr pc, =FUN_02095be4
+	bl FUN_02095be4
 LAB_020967a8:
 	mov r0,r9
 	pop {r3-r11,pc}

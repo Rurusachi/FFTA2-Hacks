@@ -39,7 +39,7 @@ SET_FUNC quest_reward_next, (0x020ff5ac) @ skip giving and writing name
 
 
 .global job_item_icon
-.set job_item_icon, 0xFB
+.set job_item_icon, 0xF7
 
 .global custom_item_names
 .set custom_item_names, 0x02164500 @ 0x0542AD48 in rom

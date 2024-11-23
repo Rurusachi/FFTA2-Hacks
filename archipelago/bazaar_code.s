@@ -13,6 +13,8 @@ bazaar_code:
     @ mov r1, #0x1
     cmp r0, #0x300
     bge special_item
+    cmp r0, #0xf5
+    beq end
     bl FUN_give_item
 
 end:

@@ -4,8 +4,11 @@ quest_reward_code:
     @ r0 = item_id, r1 = item_amount
     cmp r0, #0x300
     bge special_item
+    cmp r0, #0xf5
+    beq end
 give_item:
     bl FUN_give_item
+end:
     b quest_reward_continue
 
 special_item:

@@ -66,6 +66,26 @@ with open(patched_rom, "r+b") as rom_file:
         rom_file.seek(int(address, 16))
         rom_file.write(dmp)
 
+    # Archipelago item icon
+    with open("archipelago/archipelago_icon3", "rb") as img_file:
+        img = img_file.read()
+    rom_file.seek(0x038b52e0)
+    rom_file.write(img)
+
+    # Archipelago item name
+    with open("archipelago/archipelago_string", "rb") as s_file:
+        s = s_file.read()
+    rom_file.seek(0x02AA3171)
+    rom_file.write(s)
+
+    # Job item icon
+    with open("archipelago/job_crystal", "rb") as img_file:
+        img = img_file.read()
+    rom_file.seek(0x038B53E0)
+    rom_file.write(img)
+
 # Intro skip
 patch_intro(patched_rom)
+
+print("Creating diff")
 file_diff(original_rom, patched_rom, build_path / "base_patch.bsdiff4")

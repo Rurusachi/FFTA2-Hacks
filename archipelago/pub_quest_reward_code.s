@@ -1,5 +1,5 @@
 .arm
-@ 0x02164480
+@ 0x021644D0
 pub_quest_reward_code:
     @ r2 = item_id
     cmp r2, #0x300

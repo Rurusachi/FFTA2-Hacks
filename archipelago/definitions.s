@@ -30,7 +30,7 @@ SET_FUNC FUN_give_item, (0x020f1358)
 
 @ Quest rewards
 
-SET_FUNC quest_reward_code, (0x02164400)
+SET_FUNC quest_reward_code, (0x02164450)
 SET_FUNC quest_reward_continue, (0x020ff590)
 SET_FUNC quest_reward_next, (0x020ff5ac) @ skip giving and writing name
 
@@ -42,11 +42,11 @@ SET_FUNC quest_reward_next, (0x020ff5ac) @ skip giving and writing name
 .set job_item_icon, 0xF7
 
 .global custom_item_names
-.set custom_item_names, 0x02164500 @ 0x0542AD48 in rom
+.set custom_item_names, 0x02164600 @ 0x0542B248 in rom
 
 
 @ Pub quest rewards
 
-SET_FUNC pub_quest_reward_code, (0x02164480)
+SET_FUNC pub_quest_reward_code, (0x021644D0)
 SET_FUNC pub_quest_reward_normal, (0x0213a6b8)
 SET_FUNC pub_quest_reward_special, (0x0213a6bc)

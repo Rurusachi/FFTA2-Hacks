@@ -1,5 +1,5 @@
 .arm
-@ 0x02164400
+@ 0x02164450
 quest_reward_code:
     @ r0 = item_id, r1 = item_amount
     cmp r0, #0x300

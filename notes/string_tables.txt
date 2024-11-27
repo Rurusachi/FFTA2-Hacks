@@ -1,0 +1,25 @@
+tables:
+    0: Characters
+    1: Classes
+    2-3: Nothing
+    4: Regions (1: Targ Wood)
+    5: Locations (1: Traveler's Way)
+    6: Quests
+    7: ??? (1: Novices)
+    8: Nothing
+    9: Months
+    10: Nothing
+    11: Items
+    12: Nothing
+    13: Clans (1: Pygmalion)
+    14-16: Nothing
+    17: Menu options??? (1: Rumors)
+    18-21: Nothing
+
+
+
+
+FUN_Get_name(name_index, ...):
+    name_index is: table_index * 0x3e8 + item_index
+    table_pointer found at: 212E4E8 + table_index * 0x20 + 0x10
+    item_offset found at: table_pointer + item_index * 0xA + 0x2 (table_header) + 0x4 (index of offset)

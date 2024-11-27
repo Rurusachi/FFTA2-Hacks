@@ -1,0 +1,167 @@
+arm9 code offset: 0x1FFC000
+	(link address - 0x1FFC000 = rom offset)
+
+overlay 7 offset: 0x1FE77C0 (rom address 0x14b800, loaded to 0x02132fc0)
+	(link address - 0x1FE77C0 = rom offset)
+
+pc.bin code offset: 0x32C6C48
+	(link address + 0x32C6C48 = rom offset)
+
+Job requirements: 0x53FFEA0 - 0x54001AC (0xc bytes per job, 0x42 jobs = 0x318 bytes)
+
+
+Clan starts at 0212b120?
+
+character at 21d5020
+if 021d5022 == 0x212
+Offsets:
+Name: C (2 byte)
+Sprite: 5 (1 byte)
+Race: 7 (1 byte)
+Job: 6 (1 byte)
+Job text: 10 (2 byte)
+Help text: 12 (2 byte)
+Ability 1: E (1 byte)
+
+
+Player data?: 0x0212b0a0
+	Player name: 0x0212b0cc (0x0212b0a0 + 0x2c)
+
+021d4fa0: something in memory during battle
+
+
+FUN_020b020c(int param_1,int param_2):
+	param_2 = name_index (1 = Luso, 2 = Cid)
+
+
+Gil: 0212d6fc (2 bytes)
+
+________________________________________________________________________________________
+
+Last Equipment 0x19B
+Last Consumable 0x1AE
+
+
+pointer to quest table: 0x021314b0
+
+All missions at: first:0x022CEF84, last:0x022DB6BC (0x64 bytes)
+(Exists in overworld, maybe other times)
+
+
+Quest board in pub: first:0x022a5924 - last:0x022b205c
+
+
+mission loot: item id and amount in 2 bytes. bits 0-9 = id, 10-15 = amount
+amount: 0x0 - 0x3F (63)
+id: 0x1 - 0x27A
+(amount << 0xA) | id
+
+
+
+0x0: Only in pub if 01 or 02
+0x3: How/where to take (Bitflag): (1=Story?, Goug, Fluorgis, Moorabella, Graszton, Camoa, Targ, not trial?)
+0x4-0x5: Quest Requirement 1 (Story progress?)
+0x6-0x7: Quest Requirement 2 (Max 7FF) (bits: 0-2=bit_index, 3-9=byte_index) (flags: 0x0212d734-0x0212d774)
+0xB: Month (Blackfrost, Skyfrost, Greenfire, Bloodfire, Rosefire, Coppersun, Goldsun, Silversun, Ashleaf, Mistleaf, Emberleaf, Plumfrost)
+
+0x13: Fee (x100)
+0x14 - 0x15: Required item 1
+0x16: Required item 1 amount?
+
+
+0x18 - 0x19: Required item 2
+0x1A: Required item 2 amount?
+
+
+
+FUN_020f32c0(int quest_index):
+	if quest[0] != 1 and quest[0] != 2:
+		return 8
+	if (quest_??? & 0xf) != 1 and (quest_??? & 0xf) != 2:
+		return 8
+	is_in_region = FUN_Is_quest_in_region(quest_index)
+	if !is_in_region:
+		return 8
+	
+	for i in range(0, 5)
+
+
+FUN_020f3234():
+	Reads byte 03, and saves bits 1-6 (ignoring bits 0 and 7) on stack
+	Calls FUN_020f20c0(pointer, num)
+		uvar2 = FUN_020d0c50(0x15) // *(0x0212D849) // Current region?
+		for i in range(0, num):
+			if pointer[i] != 0:
+				if uvar2 == *(0x0211b1d0+i)
+
+
+
+FUN_02083330()
+	Returns: 0x0212b0a0
+
+FUN_020d0be4()
+	Returns FUN_02083330() + 0x2694 = 0x0212d734
+
+FUN_020d0c50(param_1)
+	ivar1 = min(param_1, 0x257) + 0x100
+	Returns *(FUN_020d0be4() + ivar1)
+
+
+
+
+0x0212b0a0 + 0x2674 = 0x0212d714: Contains main quest progress? (2 bytes?)
+0x0212b0a0 + 0x2694 = 0x0212d734: ??
+0x0212b0a0 + 0x2a90 = 0x0212DB30: Pointer to list of some quest data (4 byte data?)
+1 = 14
+2 = 46
+3 = 82
+4 = AA
+
+
+
+
+
+
+2^req2.exp & 0212d734[req2.num]
+
+=JOIN("x ",LEFT(HEX2BIN(JOIN("",GD3,GC3)), 6), RIGHT(HEX2BIN(JOIN("",GD3,GC3)), 10))
+
+
+amount = BITAND(GD3, FC00)
+item = BITAND(JOIN("", GD3, GC3), 3FF)
+
+JOIN("x ", BITAND(GD3, FC00), BITAND(JOIN("", GD3, GC3), 3FF))
+
+=JOIN("x ", BITRSHIFT(BITAND(HEX2DEC(GD4), HEX2DEC("FC")), 2), DEC2HEX(BITAND(HEX2DEC(JOIN("", GD4, GC4)), HEX2DEC("3FF"))))
+
+=JOIN("x ", BITRSHIFT(BITAND(HEX2DEC(GD4), HEX2DEC("FC")), 2), INDEX(S!GB3:GC636, DEC2HEX(BITAND(HEX2DEC(JOIN("", GD4, GC4)), HEX2DEC("3FF"))), 2))
+INDEX(S!GB3:GC636, DEC2HEX(BITAND(HEX2DEC(JOIN("", GD4, GC4)), HEX2DEC("3FF"))), 2)
+
+
+29 unique values:
+Invalid: 172, 50A, A0, 136, 168
+Story Values:
+	0014
+	0046
+	0082
+	00AA
+	00DC
+	0122
+	0154
+	017C
+	01A4
+	01D6
+	0212
+	0294
+	0302
+	0302
+	0316
+	033E
+	0384
+	03AC
+	03F2
+	0438
+	0460
+	04A6
+	04D8
+	04F6

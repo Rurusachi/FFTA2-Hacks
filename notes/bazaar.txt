@@ -1,0 +1,86 @@
+Bazaar recipes at: 0230be40 (in shop)
+
+
+Pointers to loot items in inventory: 021e91e0
+
+
+item flag offsets?: 02294728
+
+unlocked item flags: 0212d6c8
+
+
+
+
+
+00121684 = First byte of blank section (arm9.bin)
+00125684 = First byte of blank section (ffta2.nds)
+
+
+
+02135960: Just after setting item shop flag
+
+
+
+arm9 only loaded up to 0211e8cf
+
+
+
+FUN_0208aca4(filename): Load file into memory? Yes
+	FUN_0201fe38(filename) returns filedata? (?, pc.bin offset, size)
+	FUN_0201fea0(filedata) returns filesize
+	FUN_0201f134(?,filesize,?,?) returns allocatedspacepointer?
+	FUN_0201ffa4(filedata,allocatedspacepointer,filesize) copies data to allocated space?
+	FUN_0201ffe8(filedata) compares filedata+2 with data at 02127704
+
+01b2e4b8
+
+
+
+
+test:
+	pc.bin extended by 0x1000 starts at 05280d28
+	
+	
+Idea:
+	extend pc.bin with code and data
+	hook into function that is only run once (or check if already run)
+		Load extended data and save address in unused ram
+		hook jumps to code in extended data that runs replaced code and jumps back to normal execution
+		
+
+hook:		
+	ldr r4, =0x212D760
+	ldr r0, [r4]
+	cmp r0, 0
+	bne loaded
+	push {r4-r6, lr}
+	bl 0x0201fe38
+	mov r2, 0x1000
+	ldr r1, =0x05280d28
+	stmib r0, {r1, r2}
+	bl 0x0208acac # returns loaded address in r0
+	add r0, 0x18
+	str r0, [r4]
+	mov pc, r0
+
+@ In loaded file
+loaded:
+	mov r0, r10
+	ldr r1, =020cbab8
+	bl r1
+	b 020966fc
+	...
+
+
+start of file: 542AB28
+
+hook: 9A6F8
+
+loaded: 0542ab40 
+
+Fixed load location? game 542AB28 = ram 02163ee0
+
+
+arm-none-eabi-as -g -mcpu=arm7tdmi -mthumb-interwork hook.s -o hook.elf
+arm-none-eabi-ld -Ttext=0x020966F8 -g hook.elf -o hook_linked.elf
+arm-none-eabi-objcopy -S hook_linked.elf -O binary hook_linked.dmp

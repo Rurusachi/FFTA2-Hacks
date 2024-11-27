@@ -1,0 +1,18 @@
+0212d7e5: Changes when accepting missions. Decrements when leaving pub?
+
+0212d7d0: story mission flags? no
+
+mission flags: 0212d790 to 0212d7cf
+
+
+Rumor flags:  0212d764, bit 4 (offset 0212d764 - 0212d734 = 30)
+Notice flags: 0212d774, bit 4 (offset 0212d774 - 0212d734 = 40)
+Job unlock flags: 212D784, bit 5 - 212D786, bit 6 (offset 212D784 - 0212d734 = 50) (18 bits)
+Quest flags:  0212d790, bit 0 (offset 0212d790 - 0212d734 = 5C)
+
+
+mission 1 is byte 5c, bit 1
+
+1 = 0, 1
+0x46 = 0x8, 6
+0xBB = 0x17, 3

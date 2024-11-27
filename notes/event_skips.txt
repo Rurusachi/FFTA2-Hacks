@@ -1,0 +1,85 @@
+first text: 03c96f23
+03c96f23+6 to 03c97009 = E0
+
+Intro shortened + set guild name:
+03c94d0d =
+8f 00 00
+09 00 3c
+8f 00 01
+09 00 3c
+9c 00
+35 00 ff 05
+22 00 01 00
+1e 00
+
+Pre-classroom skip:
+03c94d61 =
+22 00 05 00
+1e 00
+
+Classroom skip to tutorial:
+03c95203 =
+22 00 05 00
+1e 00
+
+
+Tutorial skip:
+03c96eae = 1f 00 55 01 00 00
+03c9702f = 00
+
+
+Pub skip:
+jump from 03c9717c to 03c97688 = 506
+
+set 03c97681 to ff05
+
+________________________________________________________________________________________
+
+FUN_give_item(id, amount): 020f1358
+
+
+
+211A340 + x = 0211a4d8
+
+
+Making Magic post-battle: 021d0c5e (rom: 03ca5d0a)
+
+Gives item at 03ca5dcf = C5
+
+
+11 00 00 00 00 bc 0b 00 00 0f 00 40 01 d7 00 00 00 24
+
+
+
+
+Main_loop switch value: 021c4868
+
+Event value: 212D714 + 8 = 212D71C
+
+Set_event_pointer(int event_id)
+	ivar1 = 021c4d60 (fixed? overworld?)
+	ivar4 = *(ivar1 + 8) = 021c4da0 (event memory area)
+	ivar2 = *0212ef48 (overworld?=021d1778) (pointer to event?)
+	ivar3 = *(ivar2 + event_id * 4) (01=2A) (index into event?)
+	
+	event_pointer = 021d1778 + 2A
+
+
+
+
+Received items in 0212d753
+Test:
+	212D71C = 0
+	0212ef48 = pointer to event data
+	0212d760 = event data
+	021c4868 = 1
+	
+04 00 00 00 33 00 3b 00 20 09 00 6e 1e 00 ff ff
+
+
+
+Test Event start:
+f5 01 00 00
+
+Test Event:
+43 00 15 00 39 19 00 00 07 00 31 10 64 1b 00 03 1c 00 01 00 00 1c 00 78 00 64 09 00 3c 8f 00 00 09 00 3c

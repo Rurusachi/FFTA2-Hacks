@@ -1,0 +1,6 @@
+Equipment Inventory at: 0212ccdc (Space for all 0x27a items, so 4*0x27a bytes)
+4 bytes per item: 2-byte id, equipped amount, held amount
+
+Consumables inventory at: 0212d34c
+
+Loot inventory at: 0212d398

@@ -1,0 +1,96 @@
+021c4da0: Event data start
+
+Event data:
+021c4db0 = Event progress
+021c4db4-7 = Event data pointer
+
+Setup: 021D17AC (rom: 03c90c50)
+
+Name selection and questions: 021d1610 (rom: 03c94cf0)
+3D = Name select
+
+After name select: 021d1681 (rom: 03c94d61)
+
+Classroom cutscene: 021cec07 (rom: 03c95203)
+
+Library cutscene: 021cf724 (rom: 03c95d20)
+
+Tutorial battle: 021cfb13 (rom: 03c9610f)
+
+After tutorial battle: 021d08a9 (rom: 03c96ea5)
+
+Pub guild naming scene: 021d0b77 (rom: 03c97173)
+
+"Wanted: Ugohr" post battle: 021d046e (rom: 03c9bdea)
+
+"Wanted: Ugohr" pub (adelle joins): 021d0ade (rom: 03c9c45a)
+
+
+"Odd Places" after touching right-most well: 021d1034 (rom: 03e8a4c0)
+
+
+FUN_0209c888(param_1)
+	r1 = *(param_1 + 10) + *(param_1 + 14)
+	# It's just loading 2 bytes from *(param_1 + 10) + *(param_1 + 14)
+	
+	r7 = ldrh(r1)
+	
+	
+	(*(0211a340 + r7 * 8))(param_1)
+	
+	
+	Functions: (parameter number at 211A33C + index * 8, function pointer at 211A340 + index * 8)
+		0000 = ??? (parameters: 4 byte)
+		0003 = Animation/Movement (parameters: 4 byte)
+		0005 = ??? (parameters: 1 byte)
+		0007 = ??? (parameters: 3 byte)
+		0008 = Character speaking (parameters: 4 byte) 
+			00-01: text index, 
+			02: character index, 
+			03: position (0F = top-right no picture, 10 = top-left, 11 = top-right, 12 = bottom-left, 13 = bottom-right)
+		0009 = Wait X frames (parameters: 1 byte) Is between most commands
+		000C = Set what happens after event (param_1: 03=action, 04=map, 05=region map, 06=post-game save, 08=clan screen->black, 09=title menu 0a=clan screen, 0b=credits?) (parameters: 1 byte)
+		000E = ??? (parameters: 1 byte)
+		000F = ??? (parameters: 6 byte)
+		0011 = ??? (parameters: 1 byte)
+		0018 = ??? (parameters: 3 byte)
+		001b = ??? (parameters: 1 byte)
+		001e = Jump to next scene? (parameters: 0? bytes)
+		001f = Jump by parameter (parameters: 4 bytes) Parameter is 4 byte integer
+		0020 = Set event? (parameters: 3 bytes) (39 00 01 = pub intro)
+		0021 = ??? (parameters: 3 bytes)
+		0022 = Set next scene? (parameters: 2 bytes) 
+		0026 = ??? (parameters: 2 bytes) 
+		002d = ??? (parameters: 0 bytes)
+		0033 = Give item (parameters: 3 bytes) param_1: item_id param_2: amount
+		0034 = Animation? (parameters: 4 bytes) 00: Character index, 01+: animation index
+		0035 = Set story progress (parameters: 2 bytes)
+		0059 = text (param_1: dialogue index?) (parameters: 5 bytes)
+		0063 = ???? (parameters: 7 byte) (Possibly able to add unit to clan)
+		0071 = Give gil (param_1: amount) (parameters: 2 bytes)
+		007a = Obtained item popup (param_1: ???, param_2: item_id, param_3: amount) (parameters: 4 bytes)
+		0088 = ??? (parameters: 1 byte)
+		008E = Join clan (param_1: ??, param_2: character_index) (parameters: 2 byte)
+		008F = input name (param_1: 00=Luso, 01=guild name) (parameters: 1 byte)
+		009C = intro questions (parameters: 0 bytes)
+		00A4 = ??? (parameters: 0 bytes)
+
+
+
+
+UndefinedFunction_020992b4(): Main event loop?
+	switch *(puVar6 + 0xd):
+		case: 0x1:
+		    *puVar6 = 0;
+			puVar6[2] = 0;
+			*(undefined *)(puVar6 + 3) = 0;
+			puVar6[7] = 0;
+			
+			FUN_0209c888(puVar6)
+		case: 0x12:
+			*(puVar6 + 0x8) -= 1
+			if puVar6[2] == 0:
+				*(puVar6 + 0xd) = 1
+		
+		case: 0x16 (and 0x17?)
+			fade in/out ?

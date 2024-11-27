@@ -1,0 +1,5 @@
+FUN_overlay_7__0213ca5c (Called when opening quest in pub)
+
+
+FUN_overlay_7__0213a578 (Called at some point after FUN_overlay_7__0213ca5c)
+    Gets item names and icons for quest rewards in loop at: 0213a698

@@ -1,0 +1,52 @@
+Byte 24-25:
+	bit 0 = Bladed
+	bit 1 = Piercing
+	bit 2 = Blunt
+	bit 3 = Ranged
+	bit 4 = Female
+	bit 5 = limited stock
+	bit 6 = shop from beginning
+
+
+
+
+
+Odd Places:
+	quest 15F  = Upper-middle -> unlocks 78 (Goug)
+	quest 161 = Upper-right -> unlocks 7E (Kthili sands?)
+	quest 160 = Upper-left -> unlocks 67 (Sant D'alsa Bluff?)
+	quest 162 = Bottom-left -> unlocks 83 (The Neslowe Passage?)
+
+
+0212d848: 00 = On world map, 01 = Inside region map
+0212d849: Current location in region
+0212d84a: Current region
+
+
+
+Map exploration flags: 0212d73e, bit 1 (02) to 0212d740, bit 4 (10)
+
+Location available: 0212d741, bit 3? to 0212d752, bit 2?
+
+
+
+
+idx format:
+	length of table (a)? (4 bytes)
+	padding? (4 bytes)
+	list of ids? (length * 9):
+		? (4 bytes)
+		? (4 bytes)
+		padding? (1 byte)
+	
+	table (until datalength is 0):
+		datalength (1 byte)
+		list (datalength * ?)
+			of (4 bytes)
+			sz (0 for first element, else 4 bytes)
+			padding (0 for first element, else 4)
+			c (1 byte)
+			pos (1 byte)
+			padding (2 bytes)
+	
+		

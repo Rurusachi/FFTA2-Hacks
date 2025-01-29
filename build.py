@@ -54,7 +54,7 @@ for e in event:
 
 # Copy rom
 original_rom = pathlib.Path("rom/Final Fantasy Tactics A2 - Grimoire of the Rift.nds")
-rom = pathlib.Path("rom/FFTA2 resized.nds")
+rom = pathlib.Path("rom/FFTA2 resized.nds") # pc.bin extended by 4096 bytes
 patched_rom = build_path / rom.with_stem("FFTA2 patched").name
 shutil.copy(rom, patched_rom)
 

@@ -65,12 +65,23 @@ FUN_0209c888(param_1)
 		0033 = Give item (parameters: 3 bytes) param_1: item_id param_2: amount
 		0034 = Animation? (parameters: 4 bytes) 00: Character index, 01+: animation index
 		0035 = Set story progress (parameters: 2 bytes)
+		004A = Sets value at (story progress + 4)??? (parameters: 1 byte) (switches on parameter)
+		0051 = ??? (param_1: 1byte_function_index, param_2: 2byte_?) (parameters: 3 bytes)
+		0052 = ??? (param_1: 1byte_flag, param_2: 1byte_flag, param_3: 1byte_?, param_4: 2byte_?, param_5: 2byte_?, param_6: 2byte_?) (parameters: 9 bytes)
 		0059 = text (param_1: dialogue index?) (parameters: 5 bytes)
-		0063 = ???? (parameters: 7 byte) (Possibly able to add unit to clan)
+		0063 = ??? (parameters: 7 bytes) (Possibly able to add unit to clan)
+		0065 = Conditional jump by last parameter??? (param_1: 4bytes_?, param_2: 1byte_bitflag, param_3: 2bytes_jump) (parameters: 7 bytes)
+			param_2:
+				000: *0212EEE0 != param_1
+				001: *0212EEE0 == param_1
+				100: *0212EEE0 < param_1
+				101: *0212EEE0 <= param_1
+				010: *0212EEE0 > param_1
+				011: *0212EEE0 >= param_1
 		0071 = Give gil (param_1: amount) (parameters: 2 bytes)
 		007a = Obtained item popup (param_1: ???, param_2: item_id, param_3: amount) (parameters: 4 bytes)
 		0088 = ??? (parameters: 1 byte)
-		008E = Join clan (param_1: ??, param_2: character_index) (parameters: 2 byte)
+		008E = Join clan (param_1: ??, param_2: character_index) (parameters: 2 bytes)
 		008F = input name (param_1: 00=Luso, 01=guild name) (parameters: 1 byte)
 		009C = intro questions (parameters: 0 bytes)
 		00A4 = ??? (parameters: 0 bytes)

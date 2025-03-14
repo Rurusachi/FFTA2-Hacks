@@ -1,0 +1,445 @@
+FFTA2 hack ideas:
+	Condense Geomancy into 1 skill (call skills from skills?)
+	on-kill effects (buff/learn) (hook into kill and check used/equipped skill?)
+	Summon unit mid-combat? (and/or permanent companion)
+	Limit Breaks (use totema gauge)
+	Learn skill on kill (or other conditions)
+	Show what item is being crafted in Bazaar
+	
+
+Luso Sprite at 0xFA5698 (and 0x2EBA2F and 0x8DB443) (128x128) (sprites are 24x32, 8 unused pixels in width)
+Palette starts at -0x320
+
+Luso real world sprite at 0x1014833 (from cutscene?) (64*32)
+
+
+Something at 0x3F65698
+
+
+AP slots start at character + 0x52?
+First 23 = reactions
+Then 34 passives
+then ability slots
+character + 0x52 = reactions
+character + 0x69 = passives
+character + 0x8b = actives
+
+Last slot is 0xC7
+
+
+Agent limitation at 020b812c?
+
+
+
+Data in sysdata.pak: (rom offset - 0x53D5BEC = file offset)
+	Character Sprites (CS) (sysdata000)
+	Job Data (JD) (sysdata001)
+	Ability Set Pointers (CD) (sysdata002)
+	Abilty AP (AP) (sysdata003)
+	Ability Stats (AD) (sysdata004)
+	Ability Anims (AA) (sysdata005)
+	Unknown
+	Quest Index (QI) (sysdata010)
+	Quest Data (QD)
+	Unknown
+	Equipment Data (ED)
+	Unknown
+	Job Requirements (not in sheet yet)
+	(Status effect related?)
+	Unknown
+	Bazaar Sets (BD)
+	Bazaar Recipes (BR)
+	Unknown
+	Auction Prizes (AH)
+	Auction Grand Prizes (AH)
+	Unknown
+
+Tabs not in sysdata:
+	Recruitable Units (RU)
+	Formations (Formations) (Possibly same file as RU. Seem to be neighbours)
+	
+	String Pointers (SP)
+	Strings (S)
+
+sysdata files:
+	sysdata00: Character Sprites (CS) 		(length hardcoded at 0x020cb018 and 0x020cb01c)
+	sysdata01: Job Data (JD) 				(length hardcoded at 0x020cafdc and 0x020cafe0)
+	sysdata02: Ability Set Pointers (CD) 	(length hardcoded at 0x020cb054, 0x020cb058, 0x020b81dc(lastindex+1), overlay11+0x4898(lastindex+1) and overlay11+0x83f8(lastindex+1))
+	sysdata03: Abilty AP (AP) 				(length as 4-byte int at 0x020cb1d0)
+	sysdata04: Ability Stats (AD) 			(length as 4-byte int at 0x020cb0a8 and 0x020bbde4, but also need to move reaction and support abilities)
+	sysdata05: Ability Anims (AA) 			(length as 4-byte int at 0x020cb18c)
+	sysdata06: Reaction Abilities 			(first index at 0x020cb0f4 and 0x020bbddc, negated index at 0x020cb0f8, length hardcoded at 0x020cb0d8 and 0x020bbb58)
+	sysdata07: Support Abilities 			(first index at 0x020cb144 and 0x020bbde0, negated index at 0x020cb148, length hardcoded at 0x020cb128 and 0x020bbbcc)
+	sysdata08: (8-byte struct)
+	sysdata09: (24-byte struct)
+	sysdata10: Quest Index (QI)
+	sysdata11: Quest Data (QD)
+	sysdata12: (20-byte struct)
+	sysdata13: 
+	sysdata14: 
+	sysdata15: 
+	sysdata16: Equipment Data (ED) (length hardcoded at 0x020cb3fc, but also need to move consumable and loot items)
+	sysdata17: Consumable Data? (8-byte struct, (short buy, short sell, short ability, byte ?, byte ?))
+	sysdata18: Loot Data? (8-byte struct (short buy, short sell, byte category, byte rank?, short padding?))
+	sysdata19: Job Requirements (not in sheet yet) (length hardcoded at 0x020cb4bc, 0x020cb4c0, 0x020b80b8 (last index+1), 0x020b7f60 (last index+1), 0x020b8290 (last index+1), overlay+0x8CCC (last index+1), overlay+0x9138 (last index+1))
+	sysdata20: (Status effect related?) (20-byte struct)
+	sysdata21: 
+	sysdata22: 
+	sysdata23: 
+	sysdata24: 
+	sysdata25: Bazaar Sets (BD)
+	sysdata26: Bazaar Recipes (BR)
+	sysdata27: 
+	sysdata28: 
+	sysdata29: 
+	sysdata30: 
+	sysdata31: 
+	sysdata32: 
+	sysdata33: Auction Prizes (AH)
+	sysdata34: Auction Grand Prizes (AH)
+	sysdata35: 
+	sysdata36: Job Groups (used for equipment ability job fields) (length hardcoded at 0x020cb8b0 and 0x020cb8b4)
+	sysdata37: 
+	sysdata38: 
+	sysdata39: 
+	sysdata40: 
+	sysdata41: 
+	sysdata42: 
+	sysdata43: 
+	sysdata44: 
+	sysdata45: 
+
+entrydata files: (Formations as pairs of header and units. Recruitable units are formation 0)
+	entrydata00: Recruitable Units Header (Not in sheet
+	entrydata01: Recruitable Units Units (RU)
+	entrydata02: Battle 1 Header (Formations tab starts here)
+	entrydata02: Battle 1 Units
+	etc.
+
+
+JD_message_%d files: (%d = language enum value. 0 = us)
+	00 = Character names
+	01 = Job names
+	02 = Ability set names
+	03 = Ability names
+	04 = Region names (Targ wood, Camoa, etc.)
+	05 = Location names (Traveler's Way, Targ Wood, etc.)
+	06 = Quest names
+	07 = Clan titles? and something auction related? (Novices, Trainees, etc. + Played, Bonuses, 1st, etc.)
+	08 = Rumor titles (Was that a chocobo?, Go prepared, etc.)
+	09 = Miscellaneous menu text
+	10 = Notice titles
+	11 = Item names
+	12 = Status names?
+	13 = Clan names
+	14 = Law names
+	15 = Clan privilege names
+	16 = Auction menu text
+	17 = Quest related text (for various quest menus?)
+	18 = Miscellaneous item text (item types, item effects?)
+	19 = Alphabet?
+	20 = Partial ascii alphabet?
+	21 = Partial ascii alphabet?
+	22 = Just A's?
+	23 = Just A's?
+	24 = Bazaar text (Category titles, menu text)
+	25 = Doesn't exist?
+	26 = Doesn't exist?
+	27 = Doesn't exist?
+	28 = Doesn't exist?
+	29 = Doesn't exist?
+	30 = Ability set descriptions
+	31 = Ability descriptions
+	32 = Region descriptions?
+	33 = Location descriptions?
+	34 = Doesn't exist?
+	35 = Quest descriptions? (not used in quest list)
+	36 = Doesn't exist?
+	37 = Miscellaneous battle text?
+	38 = Job descriptions?
+	39 = Item descriptions
+	40 = Ally death text?
+	41 = Status descriptions
+	42 = Law descriptions
+	43 = Clan privilege descriptions
+	44 = Auction House text
+	45 = Pub text
+	46 = Doesn't exist?
+	47 = Ability help text?
+	48 = Unit dismiss text + some intro text ("I promise not to misbehave in class...", etc.)
+	49 = New notice text (A new notice has been added...)
+	50 = Shop text
+	51 = Opportunity text?
+	52 = Unit Info menu text (includes job requirement text)
+	53 = Bazaar category descriptions
+	54 = Clan descriptions
+
+
+Portrait at 0x3F69060 (64x96?)
+
+
+
+weapon requirements:
+	0A = Spear
+	11 = Gun?
+	13 = Hand-cannon
+	1A = Shield
+	80 = ??? Any Weapon?
+	81 = Bow or Crossbow
+	82 = Bladed weapon
+	87 = Esper accessory?
+
+
+soldier sst in memory at: 0222ea20
+units 165 - 248 are weapon sprites?
+units 249+ are in water (249 = 0 in water, etc.?)
+Unit_sst notes:
+	Header:
+		List of contained data?
+		8 bytes per entry
+		Entry:
+			bytes 0-1: used as key in binary search tree
+			byte 0: Data type
+				F0 = Palette
+				FF = unit_cg offsets?
+				00, 01, 10, 11 = Animation direction/version
+			byte 1: Animation id
+			bytes 2-3: offset / 16
+			bytes 4-5: left child
+			bytes 6-7: right child
+		
+		
+	Data Header:
+		bytes 0-1: decompressed size
+		bytes 2-3: num of elements (i.e. num of palettes, etc.)
+		bytes 4+: LZ77 header + compressed data
+		
+	Each sst file contains:
+		palettes
+			format: 32-color palettes (2 bytes per color)
+		unit_cg offsets
+			format:
+				offsets:
+					8 bytes per sprite?
+					bytes 4-5 = offset
+				sprite data:
+					Per sprite:
+						bytes 0-3: num of pieces
+						Per piece:
+							bytes 0-3: Mapping? (XY position from origin maybe?)
+							bytes 4-5: Width
+							bytes 6-7: Height
+		
+		animations?:
+			bytes 0-3: num of frames?
+			per frame:
+				bytes 0-1: ???
+				bytes 2-3: duration?
+				byte 7: Sprite index?
+				bytes 10-11: Signed int? (Seems to be inverted for mirrored sprites. X axis related?)
+				bytes 12-13: Signed int? (Y axis related?. Often(always?) half of the above value)
+			
+
+
+Animations:
+	Knife, Sword, Blade, Saber, Knightsword, Greatsword, Broadsword, Katana:
+		0x21, 0x22, 0x23
+
+	Spear, Rapier:
+		0x24, 0x25, 0x26
+	
+	Bow, Greatbow, Gun:
+		0x27, 0x28, 0x29
+	
+	Rod, Staff, Pole, Instrument, Axe, Hammer, Mace, Book:
+		0x2a, 0x2b, 0x2c
+	
+	Hand Cannon, Grenade:
+		0x2d, 0x2e, 0x2f
+	
+	Knuckles:
+		0xb, 0xc, 0xd
+	
+	Card:
+		0xf
+	
+	Default (unarmed?):
+		0xc
+		
+	Dual wield: 
+		// 0x02078378, 0x020788c0, 0x02078ca4, 0x02078d24, and 0x020cf614 (potentially) check second weapon)
+		// weapon animation is separate (probably in "menu/icon_rom/icon_anim_rom.idx", "menu/icon_rom/icon_anim.pak")
+		0x45 (bladed)
+		0x46 (piercing)
+		0x47 (bow, gun)
+		0x48 (blunt)
+
+Animation ids?: (Check which bytes in JD/CD/AD(?) this corresponds to)
+	00 00 for ????
+	03 00 for ????
+	07 00 for raising both arms (most spells use this)
+	08 00 for raising one arm (Illusionist, Bishop, Alchemist, Sage and Red Mage use this)
+	0A 00 for the focus stance
+	10 00 for ????
+	11 00 for Elpe
+	30 00 for ninjutsu
+	31 00 for skills that involve talking
+	33 00 for reading a book (Scholar uses this) 
+	36 00 for spinning before raising one arm (Arcanist uses this)
+	37 00 for ???? (Elementalist uses this)
+	38 00 for ???? (Summoner uses this)
+	3C 00 for ???? (Geomancer uses this)
+	3E 00 for flexing an arm (Some Sky Pirate skills use this)
+	F9 FF for hand-cannon skills
+	FB FF for drawing a weapon
+	FF 00 for items/mirror items/control monster? 
+
+
+CD Bytes 4-9? (bitflags):
+	02 = Hume
+	04 = Bangaa
+	08 = Nu Mou
+	10 = Viera
+	20 = Moogle
+	40 = Seeq
+	80 = Gria
+	
+	04 = Baknamy
+	08 = Sprite
+	10 = Lamia
+	20 = Wolf
+	40 = Dreamhare
+	80 = Werewolf
+	
+	01 = Antlion
+	02 = Shelling
+	04 = Malboro
+	08 = Tomato
+	10 = Cockatrice
+	20 = Chocobo
+	40 = Flan
+	80 = Bomb
+	
+	01 = Zombie
+	02 = Ghost
+	04 = Deathscythe
+	08 = Floating Eye
+	10 = Ahriman
+	20 = Tonberry
+	40 = Headless
+	80 = Behemoth
+	
+	01 = Magick Pot
+	02 = Drake
+	04 = Mimic
+	08 = Mooglebane? (It's also set to this on every skillset Dreamhares can use, Pom Pom Puree is the only one where it's by itself)
+	10 = Yowie
+	20 = Rafflesia
+	40 = Demon Wall
+	80 = Neukhia
+	
+	01 = Upsilon 
+
+
+sysdata6-7 format:
+	4 bytes per ability
+	byte 0: Max AP
+	byte 1: AP slot (for all races)
+	bytes 2-3: Unused?
+
+
+.sbn files (script files?):
+	Format:
+		1 bytes command
+		1 byte offset to next command
+		parameters
+
+
+Imhex Pattern:
+Tree version:
+#pragma eval_depth 64
+
+struct SstHeaderNode {
+    u16 value [[no_unique_address]];
+    u8 data_type [[color("0000FF")]];
+    u8 animation_id [[color("00FF00")]];
+    
+    u16 offset[[color("FF0000")]];
+    
+    s16 left_child_offset [[hidden]];
+    s16 right_child_offset [[hidden]];
+    
+    if (left_child_offset != -1) {
+        SstHeaderNode left_child @ left_child_offset*8;
+    }
+    if (right_child_offset != -1) {
+        SstHeaderNode right_child @ right_child_offset*8;
+    }
+    
+};
+
+SstHeaderNode root @ 0x0;
+
+
+List version (inaccurate):
+struct SstHeaderEntry {
+    u8 data_type[[color("0000FF")]];    //Direction??
+    u8 animation_id[[color("00FF00")]];
+    
+    u16 offset[[color("FF0000")]];
+    s16 left_value[[color("FFFF00")]];
+    s16 right_value[[color("00FFFF")]];
+};
+
+struct SstHeader {
+    u32 area_base = $;
+    $ = $+2;
+    u16 first_entry [[hidden]];
+    u16 size = (first_entry-1)*2;
+    $ = area_base;
+    
+    SstHeaderEntry entries[size];
+};
+
+
+
+
+Animation:
+struct Frame {
+    u16 unknown_1;
+    u16 duration;
+    padding[2];
+    u8 always_1;
+    u8 sprite;
+    u16 unknown_2;
+    s16 signed_1;
+    s16 signed_2;
+    padding[2];
+};
+
+struct Animation {
+    u32 count;
+    Frame frames[count];
+    
+
+};
+
+Animation anim @ 0x0;
+
+
+sbn file:
+struct Command {
+    u8 opcode;
+    u8 offset;
+    u8 parameters[offset-2];
+} [[single_color]];
+
+struct Header {
+    s16 values[4];
+};
+
+u16 numHeaders @ 0x0;
+u32 startAddress @ 0x4;
+u32 endAddress @ 0x8;
+Header headers[numHeaders] @ 0x10;
+Command commands[while($ < endAddress)] @ startAddress;
